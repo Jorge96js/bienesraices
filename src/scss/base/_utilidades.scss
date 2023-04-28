@@ -1,0 +1,21 @@
+.seccion {
+    margin-top: calc($separacion / 2);
+    margin-bottom: calc($separacion / 2);
+}
+.contenido-centrado {
+    max-width: 800px;
+}
+
+.alinear-derecha{
+    padding-top: 2.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.m-5{
+    margin: 5rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
+}
