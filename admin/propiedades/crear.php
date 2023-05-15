@@ -1,37 +1,41 @@
 <?php 
-
-    require '../../includes/funciones.php';
-    
     require '../../includes/config/db.php';
-    incluirTemplate('header');
 
-    
-    echo "aa";
 
     $db = conectarDB();
    
-    
-   
-   
-    echo "<pre>";
-    var_dump($resultado);
-    echo "</pre>";
-    
-    $titulo = $_POST['titulo'];
-    $precio = $_POST['precio'];
-    $descripcion = $_POST['descripcion'];
-    $habitaciones = $_POST['habitaciones'];
-    $wc = $_POST['wc'];
-    $estacionamiento = $_POST['estacionamiento'];
-    $vendedores_id = $_POST['vendedores_id'];
-    
-    //insertar en la BD
-    $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, vendedores_id) VALUES ('$titulo', '$precio', '$descripcion','$habitaciones','$wc','$estacionamiento','$vendedores_id')";
-    
-    $resultado = mysqli_query($db, $query);
-    
-    
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        echo "<pre>";
+        var_dump($db);
+        echo "</pre>";
+        
+        $titulo = $_POST['titulo'];
+        $precio = $_POST['precio'];
+        $descripcion = $_POST['descripcion'];
+        $habitaciones = $_POST['habitaciones'];
+        $wc = $_POST['wc'];
+        $estacionamiento = $_POST['estacionamiento'];
+        //$vendedores_id = $_POST['vendedores_id'];
+        
+        //insertar en la BD
+        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento) VALUES ('$titulo', '$precio', '$descripcion','$habitaciones','$wc','$estacionamiento')";
 
+        echo $query;
+        
+        $resultado = mysqli_query($db, $query);
+
+        if($resultado){
+            echo "insertado";
+        }
+        
+    }    
+
+   
+
+    
+    require '../../includes/funciones.php';
+
+    incluirTemplate('header');
 ?>
 
 
