@@ -3,8 +3,8 @@ function conectarDB() : mysqli {
     
     $servidor = 'localhost';
     $usuario = 'root';
-    $password = '';
-    $basededatos = 'bd_bienesraices';
+    $password = 'root';
+    $basededatos = 'crud_bienesraices';
    
     $db = mysqli_connect($servidor, $usuario, $password, $basededatos);
 
