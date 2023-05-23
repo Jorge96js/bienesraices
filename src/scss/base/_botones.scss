@@ -12,4 +12,10 @@
 
 }
 
+.boton-rojo-block{
+    @include boton($rojo, block);
+}
 
+.margin-btn{
+    margin-top: 1rem;
+}

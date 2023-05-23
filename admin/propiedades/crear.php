@@ -89,7 +89,7 @@
             
             
             if(!is_dir($carpetaImagenes)){
-                #crea la carpeta
+                #crea la carpeta si no esta
                 mkdir($carpetaImagenes);
             }
             
@@ -108,7 +108,7 @@
     
             if($resultado){
 
-                header('Location: ../index.php');
+                header('Location: ../index.php?resultado=1');
             }
         }      
     }
