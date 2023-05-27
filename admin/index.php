@@ -1,5 +1,4 @@
 <?php
-    
     //importar coneccion
     require('../includes/config/db.php');
     $db = conectarDB();
@@ -12,6 +11,34 @@
     $consulta = mysqli_query($db,$query);
 
     $resultado = $_GET['resultado'] ?? null;
+
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $id = $_POST['id'];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+
+        if($id){
+            //eliminar archivo
+            $query = "SELECT imagen FROM propiedades WHERE id =" . $id;
+            $resultado = mysqli_query($db,$query);
+            $resultado = mysqli_fetch_assoc($resultado);
+
+            
+            unlink('bienesraices\imagenes' . $resultado['imagen'] . '.jpg');
+
+
+            //eliminar propiedad
+            $query = "DELETE FROM propiedades WHERE id = ". $id;
+            $resultado = mysqli_query($db, $query);
+
+            if($resultado){
+                header('Location: index.php');
+            }
+        }
+
+    }
+
 
     require '../includes/funciones.php';
     incluirTemplate('header');
@@ -48,7 +75,10 @@
                     <td><img src="../imagenes\<?php echo $row['imagen'];?>" alt="imagen tabla" class="imagen-tabla"></td>
                     <td>$<?php echo $row['precio'];?></td>
                     <td>
-                        <a href="/" class="margin-btn boton-rojo-block">Eliminar</a>
+                        <form method="POST"  class="w-100">
+                            <input type="hidden" name="id" value="<?php echo $row['id'];?>">
+                            <input type="submit" value="Eliminar" href="/" class="margin-btn boton-rojo-block">
+                        </form>
                         <a href="propiedades/actualizar.php?id=<?php echo$row['id'];?>" class="margin-btn boton-amarillo-block">Actualizar</a>
                     </td>
                     
