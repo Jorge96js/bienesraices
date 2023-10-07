@@ -1,11 +1,8 @@
-<?php 
+<?php
+session_start(); // Iniciar la sesión antes de verificar $_SESSION
 
-    if(!$_SESSION){
-        session_start();
-    }
-    $auth =$_SESSION['login'] ?? null;
+$auth = $_SESSION['login'] ?? null;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

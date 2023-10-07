@@ -1,9 +1,8 @@
 <?php
-        require __DIR__ . "/../config/db.php";
         $db = conectarDB();
 
         //consulta
-        $query = "SELECT * FROM propiedades LIMIT ${limit}";
+        $query = "SELECT * FROM propiedades LIMIT {$limit}";
         $resultado = mysqli_query($db, $query);
 
 ?>

@@ -6,7 +6,7 @@ function conectarDB() : mysqli {
     $password = 'root';
     $basededatos = 'crud_bienesraices';
    
-    $db = mysqli_connect($servidor, $usuario, $password, $basededatos);
+    $db = new mysqli($servidor, $usuario, $password, $basededatos);
 
     if(!$db) {
         echo "Error no se pudo conectar";

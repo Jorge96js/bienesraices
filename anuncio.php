@@ -5,7 +5,7 @@
 
 
 
-    require('includes/config/db.php');
+    require('includes/app.php');
     $db = conectarDB();
 
     //consulta
@@ -18,8 +18,8 @@
         header('Location: /');
     }
 
-     include('includes/templates/header.php')
- ?>
+    incluirTemplate('header');
+?>
 
     
     <main class="contenedor seccion contenido-centrado">
