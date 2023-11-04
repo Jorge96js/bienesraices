@@ -1,12 +1,6 @@
 <?php
-    use App\Propiedad;
     use App\Vendedores;
-
-    use Intervention\Image\ImageManagerStatic as Image;
-
-
     require '../../includes/app.php';
-    phpErrores();
     estaAutenticado();
 
     //Validar id por id valido
@@ -16,42 +10,25 @@
         header('Location: ../index.php');
     }
 
-
-    //consulta para actualizar la propiedad
-    $propiedad = Propiedad::find($id);
     //consulta para obtener vendedores
-    $vendedores = Vendedores::all();
-
-    
-    $errores = Propiedad::getErrores();
-
-
+    $vendedor = Vendedores::find($id);
+    $errores = Vendedores::getErrores();
 
   //  debugear(CARPETA_IMAGENES);
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+        $args = $_POST['vendedor'];
 
-        $propiedad->sincronizar($_POST['propiedad']);
+        $vendedor->sincronizar($args);
 
-        $errores = $propiedad->validar();
-
-
-
-        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-        
-        if($_FILES['propiedad']['tmp_name']['imagen']){
-            $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
-            $propiedad->setImagen($nombreImagen);
-        }
-        
+        $errores = Vendedores::getErrores();
         if(empty($errores)){
-            $resultado = $propiedad->guardar();
+
+            $resultado = $vendedor->guardar();
             if($resultado){
                 header('Location: /admin=resultado=2');
             }
         }
-
-
     }
     
     incluirTemplate('header');
@@ -59,7 +36,7 @@
 
 
 <main class="contenedor seccion">
-    <h1>Actualizar propiedad</h1>
+    <h1>Actualizar vendeddor</h1>
     <a href="/bienesraices/admin/index.php" class="boton boton-verde">Volver</a>
 
     <?php foreach($errores as $error  ): ?>
@@ -68,8 +45,8 @@
         </div>
         <?php endforeach; ?>
 
-    <form class="formulario" method="POST" enctype="multipart/form-data">
-        <?php include("../../includes/templates/form_propiedades.php");?>
+    <form class="formulario" method="POST">
+        <?php include("../../includes/templates/formulario_vendedores.php");?>
         <input type="submit" value="Actualizar propiedad" class="boton boton-verde">
     </form>
 </main>

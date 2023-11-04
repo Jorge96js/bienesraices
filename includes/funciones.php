@@ -33,3 +33,28 @@
         error_reporting(E_ALL);
         ini_set('display_errors', '1');
     }
+
+    function validarTipoContenido($tipo){
+        $tipos = ['vendedor', 'propiedad'];
+
+        return in_array($tipo, $tipos);
+    }
+
+    function mostrarAlerta($arg){
+        $mensaje = "";
+
+        switch($arg){
+            case 1:
+                $mensaje = "Creado correctamente";
+                break;
+            case 2:
+                $mensaje = "Actualizado correctamente";
+                break;
+            case 3:
+                $mensaje = "Eliminado correctamente";
+                break;
+            default:
+            $mensaje = null;
+            break;
+        }
+    }

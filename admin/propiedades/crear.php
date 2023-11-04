@@ -5,11 +5,11 @@
         require '../../includes/app.php';
 
     use App\Propiedad;
+    use App\Vendedores;
     use Intervention\Image\ImageManagerStatic as Image;
 
 
 
-     estaAutenticado();
 
      $db = conectarDB();
      $propiedad = new Propiedad();
@@ -20,6 +20,7 @@
     $errores = Propiedad::getErrores();
 
     $errores = [];
+    $vendedores = Vendedores::all();
 
 
 
